@@ -18,12 +18,12 @@ app.use(passport.initialize());
 
 app.use('/usuarios', usuariosRouter);
 app.use('/productos', productRouter);
-
+const authToken = require('../../libs/authToken');
 passport.use(authJWT);
 
 
 // passport.authenticate('jwt', { session: false });
-app.get('/', passport.authenticate('jwt', { session: false }), (request, response) => {
+app.get('/', authToken, (request, response) => {
   
   console.log(request.user);
   logger.error('Se hizo peticion al /');

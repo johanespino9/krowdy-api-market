@@ -3,16 +3,17 @@ const uuidv4 = require('uuid/v4');
 const validateProducto = require('./productos.validate');
 const productos = require('../../../db').productos;
 const productsRoutes = express.Router();
+const authToken = require('../../libs/authToken');
 
 const logger = require('../../utils/logger');
 
 // /productos/productos
 productsRoutes.get('/', (req, res) => {
   logger.info('Se obtuvo todos los productos');
-  res.json(productos);
+  res.status(200).json(productos);
 });
 
-productsRoutes.post('/', validateProducto, (req, res) => {
+productsRoutes.post('/', [authToken,validateProducto], (req, res) => {
   const productoNuevo = { ...req.body, id: uuidv4() };
   productos.push(productoNuevo);
   res.status(201).json(productoNuevo);
@@ -31,7 +32,7 @@ productsRoutes.get('/:id', (req, res) => {
   res.json(productoFilter);
 });
 
-productsRoutes.put('/:id', validateProducto, (req, res) => {
+productsRoutes.put('/:id', [authToken,validateProducto], (req, res) => {
   const id = req.params.id;
   let index;
   let productoFilter;

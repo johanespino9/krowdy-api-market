@@ -35,7 +35,7 @@ app.get('/', authToken, (request, response) => {
 app.listen(8080, () => {
   console.log('Init server');
 });
-<<<<<<< HEAD
+
 
 
 /*
@@ -47,5 +47,3 @@ passport.use(new BasicStrategy((username, password, done) => {
   }
 }));
 */
-=======
->>>>>>> 24902041f1a013f6232ca204833f6518659d3c26

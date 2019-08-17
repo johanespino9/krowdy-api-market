@@ -11,12 +11,14 @@ const authJWT = require('./api/libs/auth');
 
 const app = express();
 
+
 app.use(bodyParser.json()); // IMPORTANTE!!!
 // stream: message => logger.info(message.trim())
 app.use(morgan('common', { stream: logger.stream.write }));
 app.use(passport.initialize());
 
 app.use('/usuarios', usuariosRouter);
+
 app.use('/productos', productRouter);
 const authToken = require('../../libs/authToken');
 passport.use(authJWT);
@@ -33,6 +35,7 @@ app.get('/', authToken, (request, response) => {
 app.listen(8080, () => {
   console.log('Init server');
 });
+<<<<<<< HEAD
 
 
 /*
@@ -44,3 +47,5 @@ passport.use(new BasicStrategy((username, password, done) => {
   }
 }));
 */
+=======
+>>>>>>> 24902041f1a013f6232ca204833f6518659d3c26
